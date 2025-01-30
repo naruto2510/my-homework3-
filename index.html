@@ -1,72 +1,103 @@
-import asyncio
+<!DOCTYPE html>
 
-from pywebio import start_server
-from pywebio.input import *
-from pywebio.output import *
-from pywebio.session import defer_call, info as session_info, run_async, run_js
+<html>
 
-chat_msgs = []
-online_users = set()
+    <head>
 
-MAX_MESSAGES_COUNT = 100
+        <title>ДЗ 5Б (лучший класс)</title>
+
+    </head>
 
 
-async def main():
-    global chat_msgs
+<body background="https://avatars.mds.yandex.net/i?id=82956c67e114add39c1a11a3d54d502e5fbf941f-12637272-images-thumbs&n=13">
 
-    put_markdown("## 🧊 Добро пожаловать в онлайн чат! он создан  натаном \nИсходный код данного чата укладывается в 100 строк кода!")
+<h1>ДЗ 5Б!(2024)</h1>
 
-    msg_box = output()
-    put_scrollable(msg_box, height=300, keep_bottom=True)
+<h1>
+    <table> 
+        
+<h1>
+    <table>  <tr><td>понедельник	                  	                                                                                                     </td></tr>
+        <tr><td>01.04.2024                              </td><td>   	        	    <b> нет:  </b>              <i>   	           </i>                       </td></tr>
+        <tr><td>	                                 	</td><td>	  	                <b>  нет:  </b>           <i>   	                </i>                       </td></tr>
+        <tr><td>		                                </td><td>    	 	            <b> биолокия:  </b>         <i>   	дописать таблицу: значение живых организмов в природе и для человека                 </i>               </td></tr> 
+        <tr><td>		                                </td><td>	                   <b> история:</b>            <i>       ничего                </i>                                     </td></tr>
+        <tr><td>	                                 	</td><td>		                <b>ВПР по русский: </b>           <i>  разбор слов под цифрой "3" темени,скворцов,книга.                </i>                       </td></tr>
+        <tr><td>	                                	</td><td> 	                    <b>математика: </b>         <i>  5 вариант впр с сайта stamgia.ru <a href="https://math5-vpr.sdamgia.ru/test?id=2223898">сылка на этот сайт</a>
+          </i>       </td></tr>
+        <tr><td>		                                </td><td>		                 <b>разговор о важном: </b>        <i>  ничего 	          </i>                        </td></tr>
+        <tr><td>	                                	</td><td>		                  <b>                </b>                   <i>   	                              </td></tr>
+        <tr><td>	                                	</td><td>	                                       <i>   	                                     </td></tr>
+        <tr><td>		                                </td><td>		                              <i>   	                                         </td></tr>   
+       
+       
+       
+       
+        <tr><td>вторник                                	</td><td>	                           <i>   	                                       </td></tr>
+        <tr><td>02.04.2024                             	</td><td>	  <b>  нет: </b>                           <i>   	                                     </td></tr>
+        <tr><td>	                                	</td><td> 	     <b> английский(Седова):  </b>   страница 106 упр.1 повторять слова                     <i>   	                                    </td></tr>
+        <tr><td>		                                </td><td>	     <b> ВПР по математике:  </b>                задание на рарточке в VKмесенджере и принести 2 двойных листочка         <i>        </td></tr>
+        <tr><td>	                                	</td><td>	 	  <b> ВПР по математике:  </b>    задание на рарточке в VKмесенджере и принести 2 двойных листочка          <i>       </td></tr>
+        <tr><td>	                                   	</td><td>		      <b> русский:  </b>  ничего                <i>   	                                      </td></tr>
+        <tr><td>	                                  	</td><td>	 	  <b>  география: </b>        повторять по тетради               <i>   	                                      </td></tr>
+        <tr><td>	                                   	</td><td>	       <b> физкультура:  </b>        ничего             <i>   	                                      </td></tr>
+        <tr><td>	                                    </td><td>	          <b>   </b>                  <i>   	                                       </td></tr>
+        <tr><td>	                                  	</td><td>		   <b>   </b>                     <i>   	                                       </td></tr>
+        <tr><td>		                                </td><td>		     <b>   </b>                           <i>   	                                         </td></tr>
+       
+       
+       
+       
+       
+       
+       
+        <tr><td>среда                                  	</td><td>	                           <i>   	                                       </td></tr>
+        <tr><td>03.04.2024                             	</td><td>	                     <b> физкультура:  </b> ничего <i>   	                                     </td></tr>
+        <tr><td>		                                </td><td>		                 <b> английский(Седова): </b> слова к диктанту страница 106 упр.1   <i>   	                                       </td></tr>
+        <tr><td>		                                </td><td>		                <b>  математика:  </b>  ни чего <i>   	                                      </td></tr>
+        <tr><td>		                                </td><td>	 	                <b>  русский:   </b> упр.610 <i>   	                                      </td></tr>
+        <tr><td>		                                </td><td>	                   <b>   история:  </b>  параграф 22 учить <i>   	                                       </td></tr>
+        <tr><td>		                                </td><td>		               <b>     </b>   <i>   	                                      </td></tr>
+        <tr><td>	                                	</td><td>	                    <b>  </b>    <i>   	                                      </td></tr>
+        <tr><td>		                                </td><td>	                   <b>    </b>    <i>   	                                       </td></tr>
+        <tr><td>		                                </td><td>	                     <b>   </b>   <i>   	                                       </td></tr>
+        <tr><td>		                                </td><td>		                              <i>   	                                         </td></tr>
+       
+       
+       
+       
+       
+        <tr><td>четверг	                                </td><td>	 	                      <i>   	                                    </td></tr>
+        <tr><td>04.04.2024                              </td><td>	                    <b> литература:   </b>  страница 107-115 читать на пересказ <i>   	                                       </td></tr>
+        <tr><td>		                                </td><td>		                <b> изо   </b> краски:  <i>   	                                      </td></tr>
+        <tr><td>		                                </td><td>	                    <b>  ВПР по биалогии: </b> читать параграф 17 и 18 учить термены и отвечать на вопросы   <i>   	                                     </td></tr>
+        <tr><td>	                                  	</td><td>	 	                <b>   математика: </b>  №929 + девочки-делают красворд ссвязаный с математикой, мальчики ищут интерестный факт про математику можно написать,а можно распечатать<i>                                            </td></tr>
+        <tr><td>		                                </td><td>	 	                <b>   русский: </b>  упр.614 <i>   	                                       </td></tr>
+        <tr><td>		                                </td><td>		               <b>     </b>   <i>   	                                       </td></tr>
+        <tr><td>		                                </td><td>		               <b>     </b>   <i>   	                                       </td></tr>
+        <tr><td>	                                 	</td><td>		                <b>    </b>   <i>   	                                       </td></tr>
+        <tr><td>		                                </td><td>		               <b>     </b>   <i>   	                                      </td></tr>
+        <tr><td>		                                </td><td>		                              <i>   	                                         </td></tr>
+        
+        
+        
+        
+        
+        <tr><td>пятница	                                </td><td>	 	                       <i>   	                                      </td></tr>
+        <tr><td>05.04.2024                           	</td><td>	        	        <b>математика:     </b>     №941,943	<i>                                      </td></tr>
+        <tr><td>		                                </td><td>	                   <b>  руский:    </b>   	    упр.623    <i>                                </td></tr>
+        <tr><td>		                                </td><td>	 	                <b>  естествознание:     </b>  интерестный факт<i> 	                                      </td></tr>
+        <tr><td>		                                </td><td>	 	                <b>  английский(Седова):    </b>составить красворд из 13 слов "названия магазинов"страница 106 №1 <i>   	                                       </td></tr>
+        <tr><td>		                                </td><td>	 	                <b>     </b>  <i>   	                                       </td></tr>
+        <tr><td>		                                </td><td>	 	               <b>       </b> <i>                                              </td></tr> 
+        
+        
+        </table>
+        
+</h1>
 
-    nickname = await input("Войти в чат", required=True, placeholder="Ваше имя",
-                           validate=lambda n: "Такой ник уже используется!" if n in online_users or n == '📢' else None)
-    online_users.add(nickname)
 
-    chat_msgs.append(('📢', f'`{nickname}` присоединился к чату!'))
-    msg_box.append(put_markdown(f'📢 `{nickname}` присоединился к чату'))
+</body>
 
-    refresh_task = run_async(refresh_msg(nickname, msg_box))
+</html>
 
-    while True:
-        data = await input_group("💭 Новое сообщение", [
-            input(placeholder="Текст сообщения ...", name="msg"),
-            actions(name="cmd", buttons=["Отправить", {'label': "Выйти из чата", 'type': 'cancel'}])
-        ], validate=lambda m: ('msg', "Введите текст сообщения!") if m["cmd"] == "Отправить" and not m['msg'] else None)
-
-        if data is None:
-            break
-
-        msg_box.append(put_markdown(f"`{nickname}`: {data['msg']}"))
-        chat_msgs.append((nickname, data['msg']))
-
-    refresh_task.close()
-
-    online_users.remove(nickname)
-    toast("Вы вышли из чата!")
-    msg_box.append(put_markdown(f'📢 Пользователь `{nickname}` покинул чат!'))
-    chat_msgs.append(('📢', f'Пользователь `{nickname}` покинул чат!'))
-
-    put_buttons(['Перезайти'], onclick=lambda btn: run_js('window.location.reload()'))
-
-
-async def refresh_msg(nickname, msg_box):
-    global chat_msgs
-    last_idx = len(chat_msgs)
-
-    while True:
-        await asyncio.sleep(1)
-
-        for m in chat_msgs[last_idx:]:
-            if m[0] != nickname:  # if not a message from current user
-                msg_box.append(put_markdown(f"`{m[0]}`: {m[1]}"))
-
-        # remove expired
-        if len(chat_msgs) > MAX_MESSAGES_COUNT:
-            chat_msgs = chat_msgs[len(chat_msgs) // 2:]
-
-        last_idx = len(chat_msgs)
-
-
-if __name__ == "__main__":
-    start_server(main, debug=True, port=8080, cdn=False)
