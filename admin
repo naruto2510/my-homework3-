@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Админ-панель</title>
+</head>
+<body>
+    <h1>Админ-панель</h1>
+    <label for="admin-password">Введите пароль админа:</label>
+    <input type="password" id="admin-password" required>
+    <button onclick="checkPassword()">Войти</button>
+
+    <div id="database-container" style="display: none;">
+        <h2>Данные пользователей</h2>
+        <ul id="user-list">
+        </ul>
+    </div>
+  <script>
+       async function checkPassword() {
+        const password = document.getElementById('admin-password').value;
+
+         if (password === 'kalina530') {
+          document.getElementById('database-container').style.display = 'block';
+         await loadDatabase();
+        } else {
+         alert('Неверный пароль!');
+        }
+    }
+       async function loadDatabase() {
+            try {
+             const response = await fetch('data.json');
+
+              if (!response.ok) {
+                 throw new Error('Ошибка при чтении базы данных');
+                }
+                const users = await response.json();
+
+             const userList = document.getElementById('user-list');
+              users.forEach(user => {
+                const li = document.createElement('li');
+                  li.textContent = `Имя: ${user.username}, Email: ${user.email}, Пароль: ${user.password}`;
+                 userList.appendChild(li);
+             });
+             } catch (error) {
+              console.error('Ошибка при загрузке базы данных:', error);
+                }
+       }
+
+    </script>
+</body>
+</html>
