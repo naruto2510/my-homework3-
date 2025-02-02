@@ -1,9 +1,9 @@
-<!DOCTYPE html>
-    <html>
+<!DOCTYPE html>  <html>
     <head>
     <title>ДЗ 6Б (лучший класс)</title>
     </head>
-    <body background="https://ecohimpribor.ru/wp-content/uploads/2022/08/seraya.jpg"></body>
+    <body background="https://ecohimpribor.ru/wp-content/uploads/2022/08/seraya.jpg
+    "></body>
     <h1>ДЗ 6Б  (2025)</h1>
     <h1><pre>                         Расписание занятий                               </pre></h1>
     <table> <tr><td>понедельник</td><td>  РАЗГОВОРЫ О ВАЖНОМ: ничего   	                </td></tr>
@@ -60,3 +60,4 @@
             </table>
 </body>
 </html>
+
