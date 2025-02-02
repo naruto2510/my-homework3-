@@ -62,7 +62,7 @@
 <body>
     <div class="container">
 
-        <div id="register-form">
+       <div id="register-form">
             <h2>Регистрация</h2>
             <form onsubmit="handleRegister(event)">
                 <div class="form-group">
@@ -82,7 +82,7 @@
             <p>Уже есть аккаунт? <a href="#" onclick="showLoginForm()">Войти</a></p>
         </div>
 
-         <div id="login-form" class="hidden">
+        <div id="login-form" class="hidden">
             <h2>Вход</h2>
             <form onsubmit="handleLogin(event)">
                 <div class="form-group">
@@ -101,8 +101,9 @@
         </div>
     </div>
 
-     <script>
-         function showRegisterForm() {
+    <script>
+
+        function showRegisterForm() {
             document.getElementById('login-form').classList.add('hidden');
             document.getElementById('register-form').classList.remove('hidden');
         }
@@ -113,7 +114,7 @@
         }
 
 
-          function handleRegister(event) {
+        function handleRegister(event) {
             event.preventDefault();
             const username = document.getElementById('register-username').value;
             const password = document.getElementById('register-password').value;
@@ -123,9 +124,11 @@
              localStorage.setItem('password', password);
              localStorage.setItem('email',email);
 
-            // Важно: Замените путь на свой фактический путь к файлу
-            window.location.href = 'C:/Users/natan/OneDrive/Рабочий стол/папка програм/Homwork5B.html.html';
+            // Замените эту строку, если нужно перенаправление на другую страницу
+           // window.location.href = 'https://example.com/profile';
+            alert('Регистрация прошла успешно!');
         }
+
 
         function handleLogin(event) {
             event.preventDefault();
@@ -143,12 +146,14 @@
 
 
             if (username === storedUsername && password === storedPassword) {
-                   // Важно: Замените путь на свой фактический путь к файлу
-               window.location.href = 'C:/Users/natan/OneDrive/Рабочий стол/папка програм/Homwork5B.html.html';
+                 // Замените эту строку, если нужно перенаправление на другую страницу
+               //window.location.href = 'https://example.com/profile';
+               alert('Вход выполнен успешно!');
             } else {
                 document.getElementById('login-error').classList.remove('hidden');
             }
         }
+
     </script>
 </body>
 </html>
