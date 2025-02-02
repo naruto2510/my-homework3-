@@ -102,7 +102,6 @@
     </div>
 
     <script>
-
         function showRegisterForm() {
             document.getElementById('login-form').classList.add('hidden');
             document.getElementById('register-form').classList.remove('hidden');
@@ -113,22 +112,18 @@
             document.getElementById('register-form').classList.add('hidden');
         }
 
-
         function handleRegister(event) {
             event.preventDefault();
             const username = document.getElementById('register-username').value;
             const password = document.getElementById('register-password').value;
-             const email = document.getElementById('register-email').value;
+            const email = document.getElementById('register-email').value;
 
-             localStorage.setItem('username', username);
-             localStorage.setItem('password', password);
-             localStorage.setItem('email',email);
+            localStorage.setItem('username', username);
+            localStorage.setItem('password', password);
+            localStorage.setItem('email',email);
 
-            // Замените эту строку, если нужно перенаправление на другую страницу
-           // window.location.href = 'https://example.com/profile';
-            alert('Регистрация прошла успешно!');
+             alert('Регистрация прошла успешно!');
         }
-
 
         function handleLogin(event) {
             event.preventDefault();
@@ -138,21 +133,20 @@
             const storedUsername = localStorage.getItem('username');
             const storedPassword = localStorage.getItem('password');
 
-
-             if(storedUsername === null){
+            if (storedUsername === null) {
                 document.getElementById('login-noaccount').classList.remove('hidden');
-                 return;
+                return;
             }
 
-
             if (username === storedUsername && password === storedPassword) {
-                 // Замените эту строку, если нужно перенаправление на другую страницу
-               //window.location.href = 'https://example.com/profile';
-               alert('Вход выполнен успешно!');
+                alert('Вход выполнен успешно!');
             } else {
                 document.getElementById('login-error').classList.remove('hidden');
             }
         }
+    </script>
+</body>
+</html>
 
     </script>
 </body>
