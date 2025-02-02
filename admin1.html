@@ -13,8 +13,17 @@
 
     <div id="database-container" style="display: none;">
         <h2>Данные пользователей</h2>
-        <ul id="user-list">
-        </ul>
+        <table id="user-table" border="1">
+            <thead>
+                 <tr>
+                    <th>Имя</th>
+                    <th>Email</th>
+                    <th>Пароль</th>
+                </tr>
+            </thead>
+              <tbody id="user-list">
+             </tbody>
+       </table>
     </div>
   <script>
        async function checkPassword() {
@@ -35,13 +44,22 @@
                  throw new Error('Ошибка при чтении базы данных');
                 }
                 const users = await response.json();
-
-             const userList = document.getElementById('user-list');
+                const userList = document.getElementById('user-list');
               users.forEach(user => {
-                const li = document.createElement('li');
-                  li.textContent = `Имя: ${user.username}, Email: ${user.email}, Пароль: ${user.password}`;
-                 userList.appendChild(li);
-             });
+                const row = document.createElement('tr');
+                  const nameCell = document.createElement('td')
+                   nameCell.textContent = user.username;
+                  const emailCell = document.createElement('td')
+                   emailCell.textContent = user.email;
+                   const passwordCell = document.createElement('td')
+                   passwordCell.textContent = user.password;
+                   row.appendChild(nameCell)
+                    row.appendChild(emailCell)
+                    row.appendChild(passwordCell)
+                    userList.appendChild(row)
+              });
+
+
              } catch (error) {
               console.error('Ошибка при загрузке базы данных:', error);
                 }
