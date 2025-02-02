@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вход и Регистрация</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        h2 {
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            text-align: left;
+        }
+        input[type="text"],
+        input[type="password"] {
+            width: calc(100% - 22px);
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .error-message {
+            color: red;
+            margin-top: 5px;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <div id="login-form">
+            <h2>Вход</h2>
+            <form onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label for="login-username">Имя пользователя</label>
+                    <input type="text" id="login-username" required>
+                </div>
+                <div class="form-group">
+                    <label for="login-password">Пароль</label>
+                    <input type="password" id="login-password" required>
+                </div>
+                <button type="submit">Войти</button>
+                <p class="error-message hidden" id="login-error">Неверное имя пользователя или пароль.</p>
+                 <p class="error-message hidden" id="login-noaccount">Аккаунт не найден, зарегистрируйтесь.</p>
+            </form>
+            <p>Нет аккаунта? <a href="#" onclick="showRegisterForm()">Зарегистрироваться</a></p>
+        </div>
+
+
+        <div id="register-form" class="hidden">
+            <h2>Регистрация</h2>
+            <form onsubmit="handleRegister(event)">
+                <div class="form-group">
+                    <label for="register-username">Имя пользователя</label>
+                    <input type="text" id="register-username" required>
+                </div>
+                <div class="form-group">
+                    <label for="register-password">Пароль</label>
+                    <input type="password" id="register-password" required>
+                </div>
+                 <div class="form-group">
+                    <label for="register-email">Email</label>
+                    <input type="text" id="register-email" required>
+                </div>
+                <button type="submit">Зарегистрироваться</button>
+            </form>
+            <p>Уже есть аккаунт? <a href="#" onclick="showLoginForm()">Войти</a></p>
+        </div>
+
+
+    </div>
+
+    <script>
+        function showRegisterForm() {
+            document.getElementById('login-form').classList.add('hidden');
+            document.getElementById('register-form').classList.remove('hidden');
+        }
+
+        function showLoginForm() {
+            document.getElementById('login-form').classList.remove('hidden');
+            document.getElementById('register-form').classList.add('hidden');
+        }
+
+        function handleRegister(event) {
+            event.preventDefault();
+            const username = document.getElementById('register-username').value;
+            const password = document.getElementById('register-password').value;
+             const email = document.getElementById('register-email').value;
+
+             localStorage.setItem('username', username);
+             localStorage.setItem('password', password);
+             localStorage.setItem('email',email);
+
+            // Важно: Замените путь на свой фактический путь к файлу
+            window.location.href = 'C:/Users/natan/OneDrive/Рабочий стол/папка програм/Homwork5B.html.html';
+        }
+
+        function handleLogin(event) {
+            event.preventDefault();
+            const username = document.getElementById('login-username').value;
+            const password = document.getElementById('login-password').value;
+
+            const storedUsername = localStorage.getItem('username');
+            const storedPassword = localStorage.getItem('password');
+
+
+             if(storedUsername === null){
+                document.getElementById('login-noaccount').classList.remove('hidden');
+                 return;
+            }
+
+
+            if (username === storedUsername && password === storedPassword) {
+                   // Важно: Замените путь на свой фактический путь к файлу
+               window.location.href = 'C:/Users/natan/OneDrive/Рабочий стол/папка програм/Homwork5B.html.html';
+            } else {
+                document.getElementById('login-error').classList.remove('hidden');
+            }
+        }
+    </script>
+</body>
+</html>
