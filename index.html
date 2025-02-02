@@ -62,7 +62,7 @@
 <body>
     <div class="container">
 
-       <div id="register-form">
+        <div id="register-form">
             <h2>Регистрация</h2>
             <form onsubmit="handleRegister(event)">
                 <div class="form-group">
@@ -82,7 +82,7 @@
             <p>Уже есть аккаунт? <a href="#" onclick="showLoginForm()">Войти</a></p>
         </div>
 
-        <div id="login-form" class="hidden">
+         <div id="login-form" class="hidden">
             <h2>Вход</h2>
             <form onsubmit="handleLogin(event)">
                 <div class="form-group">
@@ -95,14 +95,14 @@
                 </div>
                 <button type="submit">Войти</button>
                 <p class="error-message hidden" id="login-error">Неверное имя пользователя или пароль.</p>
-                <p class="error-message hidden" id="login-noaccount">Аккаунт не найден, зарегистрируйтесь.</p>
+                 <p class="error-message hidden" id="login-noaccount">Аккаунт не найден, зарегистрируйтесь.</p>
             </form>
-             <p>Нет аккаунта? <a href="#" onclick="showRegisterForm()">Зарегистрироваться</a></p>
+            <p>Нет аккаунта? <a href="#" onclick="showRegisterForm()">Зарегистрироваться</a></p>
         </div>
     </div>
 
      <script>
-        function showRegisterForm() {
+         function showRegisterForm() {
             document.getElementById('login-form').classList.add('hidden');
             document.getElementById('register-form').classList.remove('hidden');
         }
@@ -111,6 +111,7 @@
             document.getElementById('login-form').classList.remove('hidden');
             document.getElementById('register-form').classList.add('hidden');
         }
+
 
           function handleRegister(event) {
             event.preventDefault();
@@ -122,11 +123,11 @@
              localStorage.setItem('password', password);
              localStorage.setItem('email',email);
 
-            console.log('Сохраненные данные:', localStorage); // Добавили эту строку
-             window.location.href = 'Homwork5B.html.html';
+            // Важно: Замените путь на свой фактический путь к файлу
+            window.location.href = 'C:\Users\natan\OneDrive\Рабочий стол\папка програм\Homwork5B.html.html';
         }
 
-       function handleLogin(event) {
+        function handleLogin(event) {
             event.preventDefault();
             const username = document.getElementById('login-username').value;
             const password = document.getElementById('login-password').value;
@@ -134,13 +135,16 @@
             const storedUsername = localStorage.getItem('username');
             const storedPassword = localStorage.getItem('password');
 
-            if (storedUsername === null) {
+
+             if(storedUsername === null){
                 document.getElementById('login-noaccount').classList.remove('hidden');
-                return;
+                 return;
             }
 
+
             if (username === storedUsername && password === storedPassword) {
-                alert('Вход выполнен успешно!');
+                   // Важно: Замените путь на свой фактический путь к файлу
+               window.location.href = 'C:\Users\natan\OneDrive\Рабочий стол\папка програм\Homwork5B.html.html';
             } else {
                 document.getElementById('login-error').classList.remove('hidden');
             }
