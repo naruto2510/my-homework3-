@@ -102,7 +102,7 @@
     </div>
 
     <script>
-       function showRegisterForm() {
+        function showRegisterForm() {
             document.getElementById('login-form').classList.add('hidden');
             document.getElementById('register-form').classList.remove('hidden');
         }
@@ -112,26 +112,27 @@
             document.getElementById('register-form').classList.add('hidden');
         }
 
-       function handleRegister(event) {
+
+        function handleRegister(event) {
             event.preventDefault();
             const username = document.getElementById('register-username').value;
             const password = document.getElementById('register-password').value;
             const email = document.getElementById('register-email').value;
 
-             localStorage.setItem('username', username);
+            localStorage.setItem('username', username);
             localStorage.setItem('password', password);
-            localStorage.setItem('email',email);
-
-          const isLocal = window.location.protocol === 'file:';
+            localStorage.setItem('email', email);
+            const isLocal = window.location.protocol === 'file:';
 
             if (isLocal) {
-            window.location.href = 'C:/Users/natan/OneDrive/Рабочий стол/папка програм/Homwork5B.html.html'; // Локальный путь
-           } else {
+               window.location.href = 'C:/Users/natan/OneDrive/Рабочий стол/папка програм/Homwork5B.html.html'; // Локальный путь
+            } else {
               window.location.href = 'Homwork5B.html.html'; // Относительный путь для GitHub Pages
-           }
+             }
+
         }
 
-       function handleLogin(event) {
+         function handleLogin(event) {
             event.preventDefault();
             const username = document.getElementById('login-username').value;
             const password = document.getElementById('login-password').value;
@@ -139,13 +140,21 @@
             const storedUsername = localStorage.getItem('username');
             const storedPassword = localStorage.getItem('password');
 
-            if (storedUsername === null) {
+
+             const isLocal = window.location.protocol === 'file:';
+
+           if (storedUsername === null) {
                 document.getElementById('login-noaccount').classList.remove('hidden');
                 return;
             }
 
             if (username === storedUsername && password === storedPassword) {
-                alert('Вход выполнен успешно!');
+
+              if (isLocal) {
+                window.location.href = 'C:/Users/natan/OneDrive/Рабочий стол/папка програм/Homwork5B.html.html'; // Локальный путь
+                } else {
+                  window.location.href = 'Homwork5B.html.html'; // Относительный путь для GitHub Pages
+                  }
             } else {
                 document.getElementById('login-error').classList.remove('hidden');
             }
