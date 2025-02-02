@@ -61,26 +61,8 @@
 </head>
 <body>
     <div class="container">
-        <div id="login-form" class="hidden">
-            <h2>Вход</h2>
-            <form onsubmit="handleLogin(event)">
-                <div class="form-group">
-                    <label for="login-username">Имя пользователя</label>
-                    <input type="text" id="login-username" required>
-                </div>
-                <div class="form-group">
-                    <label for="login-password">Пароль</label>
-                    <input type="password" id="login-password" required>
-                </div>
-                <button type="submit">Войти</button>
-                <p class="error-message hidden" id="login-error">Неверное имя пользователя или пароль.</p>
-                 <p class="error-message hidden" id="login-noaccount">Аккаунт не найден, зарегистрируйтесь.</p>
-            </form>
-            <p>Нет аккаунта? <a href="#" onclick="showRegisterForm()">Зарегистрироваться</a></p>
-        </div>
 
-
-        <div id="register-form" >
+        <div id="register-form">
             <h2>Регистрация</h2>
             <form onsubmit="handleRegister(event)">
                 <div class="form-group">
@@ -99,10 +81,27 @@
             </form>
             <p>Уже есть аккаунт? <a href="#" onclick="showLoginForm()">Войти</a></p>
         </div>
+
+         <div id="login-form" class="hidden">
+            <h2>Вход</h2>
+            <form onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label for="login-username">Имя пользователя</label>
+                    <input type="text" id="login-username" required>
+                </div>
+                <div class="form-group">
+                    <label for="login-password">Пароль</label>
+                    <input type="password" id="login-password" required>
+                </div>
+                <button type="submit">Войти</button>
+                <p class="error-message hidden" id="login-error">Неверное имя пользователя или пароль.</p>
+                 <p class="error-message hidden" id="login-noaccount">Аккаунт не найден, зарегистрируйтесь.</p>
+            </form>
+            <p>Нет аккаунта? <a href="#" onclick="showRegisterForm()">Зарегистрироваться</a></p>
+        </div>
     </div>
 
-    <script>
-        // Заменили порядок, чтобы register-form отображался первым
+     <script>
          function showRegisterForm() {
             document.getElementById('login-form').classList.add('hidden');
             document.getElementById('register-form').classList.remove('hidden');
@@ -112,6 +111,8 @@
             document.getElementById('login-form').classList.remove('hidden');
             document.getElementById('register-form').classList.add('hidden');
         }
+
+
           function handleRegister(event) {
             event.preventDefault();
             const username = document.getElementById('register-username').value;
