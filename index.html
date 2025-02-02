@@ -101,7 +101,7 @@
         </div>
     </div>
 
-    <script>
+     <script>
         function showRegisterForm() {
             document.getElementById('login-form').classList.add('hidden');
             document.getElementById('register-form').classList.remove('hidden');
@@ -116,17 +116,17 @@
             event.preventDefault();
             const username = document.getElementById('register-username').value;
             const password = document.getElementById('register-password').value;
-            const email = document.getElementById('register-email').value;
+             const email = document.getElementById('register-email').value;
 
              localStorage.setItem('username', username);
              localStorage.setItem('password', password);
              localStorage.setItem('email',email);
 
-            window.location.href = 'Homwork5B.html.html'; // Относительный путь
-
+            console.log('Сохраненные данные:', localStorage); // Добавили эту строку
+             window.location.href = 'Homwork5B.html.html';
         }
 
-        function handleLogin(event) {
+       function handleLogin(event) {
             event.preventDefault();
             const username = document.getElementById('login-username').value;
             const password = document.getElementById('login-password').value;
