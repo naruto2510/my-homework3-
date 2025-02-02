@@ -73,7 +73,7 @@
                     <label for="register-password">Пароль</label>
                     <input type="password" id="register-password" required>
                 </div>
-                <div class="form-group">
+                 <div class="form-group">
                     <label for="register-email">Email</label>
                     <input type="text" id="register-email" required>
                 </div>
@@ -95,14 +95,14 @@
                 </div>
                 <button type="submit">Войти</button>
                 <p class="error-message hidden" id="login-error">Неверное имя пользователя или пароль.</p>
-                 <p class="error-message hidden" id="login-noaccount">Аккаунт не найден, зарегистрируйтесь.</p>
+                <p class="error-message hidden" id="login-noaccount">Аккаунт не найден, зарегистрируйтесь.</p>
             </form>
-            <p>Нет аккаунта? <a href="#" onclick="showRegisterForm()">Зарегистрироваться</a></p>
+             <p>Нет аккаунта? <a href="#" onclick="showRegisterForm()">Зарегистрироваться</a></p>
         </div>
     </div>
 
-    <script>
-          function showRegisterForm() {
+   <script>
+        function showRegisterForm() {
             document.getElementById('login-form').classList.add('hidden');
             document.getElementById('register-form').classList.remove('hidden');
         }
@@ -111,23 +111,21 @@
             document.getElementById('login-form').classList.remove('hidden');
             document.getElementById('register-form').classList.add('hidden');
         }
-
-
-          function handleRegister(event) {
+         function handleRegister(event) {
             event.preventDefault();
             const username = document.getElementById('register-username').value;
             const password = document.getElementById('register-password').value;
             const email = document.getElementById('register-email').value;
 
-            localStorage.setItem('username', username);
+
+             localStorage.setItem('username', username);
             localStorage.setItem('password', password);
             localStorage.setItem('email', email);
 
-           window.location.href = 'https://github.com/naruto2510/my-homework3-/blob/main/index.html';
+
+            window.location.href = 'C:/Users/natan/OneDrive/Рабочий стол/папка програм/Homwork5B.html.html';
         }
-
-
-        function handleLogin(event) {
+      function handleLogin(event) {
             event.preventDefault();
             const username = document.getElementById('login-username').value;
             const password = document.getElementById('login-password').value;
@@ -141,7 +139,7 @@
             }
 
             if (username === storedUsername && password === storedPassword) {
-               alert('Вход выполнен успешно!');
+                alert('Вход выполнен успешно!');
             } else {
                 document.getElementById('login-error').classList.remove('hidden');
             }
