@@ -62,7 +62,7 @@
 <body>
     <div class="container">
 
-       <div id="register-form">
+        <div id="register-form">
             <h2>Регистрация</h2>
             <form onsubmit="handleRegister(event)">
                 <div class="form-group">
@@ -73,7 +73,7 @@
                     <label for="register-password">Пароль</label>
                     <input type="password" id="register-password" required>
                 </div>
-                 <div class="form-group">
+                <div class="form-group">
                     <label for="register-email">Email</label>
                     <input type="text" id="register-email" required>
                 </div>
@@ -102,7 +102,7 @@
     </div>
 
     <script>
-        function showRegisterForm() {
+       function showRegisterForm() {
             document.getElementById('login-form').classList.add('hidden');
             document.getElementById('register-form').classList.remove('hidden');
         }
@@ -112,21 +112,26 @@
             document.getElementById('register-form').classList.add('hidden');
         }
 
-        function handleRegister(event) {
+       function handleRegister(event) {
             event.preventDefault();
             const username = document.getElementById('register-username').value;
             const password = document.getElementById('register-password').value;
             const email = document.getElementById('register-email').value;
 
-            localStorage.setItem('username', username);
+             localStorage.setItem('username', username);
             localStorage.setItem('password', password);
-            localStorage.setItem('email', email);
+            localStorage.setItem('email',email);
 
+          const isLocal = window.location.protocol === 'file:';
+
+            if (isLocal) {
             window.location.href = 'C:/Users/natan/OneDrive/Рабочий стол/папка програм/Homwork5B.html.html'; // Локальный путь
-
+           } else {
+              window.location.href = 'Homwork5B.html.html'; // Относительный путь для GitHub Pages
+           }
         }
 
-        function handleLogin(event) {
+       function handleLogin(event) {
             event.preventDefault();
             const username = document.getElementById('login-username').value;
             const password = document.getElementById('login-password').value;
