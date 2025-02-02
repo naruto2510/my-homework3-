@@ -99,10 +99,11 @@
             </form>
              <p>Нет аккаунта? <a href="#" onclick="showRegisterForm()">Зарегистрироваться</a></p>
         </div>
+         <button onclick="goToAdmin()">Админ-панель</button>
     </div>
 
     <script>
-        function showRegisterForm() {
+     function showRegisterForm() {
             document.getElementById('login-form').classList.add('hidden');
             document.getElementById('register-form').classList.remove('hidden');
         }
@@ -111,6 +112,7 @@
             document.getElementById('login-form').classList.remove('hidden');
             document.getElementById('register-form').classList.add('hidden');
         }
+
         async function handleRegister(event) {
             event.preventDefault();
             const username = document.getElementById('register-username').value;
@@ -119,65 +121,72 @@
 
              const userData = {
                   username: username,
-                  password: password,
-                   email: email
-             }
-            try{
-              const response = await fetch ('data.json')
-             let users = []
-           if(response.ok){
-              users = await response.json()
-           }
+                 password: password,
+                email: email
+             };
+            try {
+               const response = await fetch('data.json');
+               let users = [];
+                if (response.ok) {
+                   users = await response.json();
+                 }
 
+                 users.push(userData);
+                 await fetch('data.json', {
+                     method: 'PUT',
+                    headers: {
+                      'Content-Type': 'application/json',
+                  },
+                  body: JSON.stringify(users),
+                 });
 
-          users.push(userData)
-         await fetch('data.json',{
-             method: 'PUT',
-             headers:{
-                'Content-Type': 'application/json',
-             },
-              body: JSON.stringify(users),
-          })
-           const isLocal = window.location.protocol === 'file:';
-             if (isLocal) {
-              window.location.href = 'C:/Users/natan/OneDrive/Рабочий стол/папка програм/Homwork5B.html.html'; // Локальный путь
-            } else {
-              window.location.href = 'Homwork5B.html.html'; // Относительный путь для GitHub Pages
+                const isLocal = window.location.protocol === 'file:';
+
+                if (isLocal) {
+                   window.location.href = 'C:/Users/natan/OneDrive/Рабочий стол/папка програм/Homwork5B.html.html'; // Локальный путь
+                 } else {
+                   window.location.href = 'Homwork5B.html.html'; // Относительный путь для GitHub Pages
+                  }
+
+            } catch (error) {
+                console.error('Ошибка при сохранении данных', error);
             }
-
-            }catch(error){
-                console.error('Ошибка при сохранении данных',error)
-            }
-         }
+        }
         async function handleLogin(event) {
             event.preventDefault();
             const username = document.getElementById('login-username').value;
             const password = document.getElementById('login-password').value;
-
-             try {
-                const response = await fetch('data.json');
-                  if (!response.ok) {
-                       throw new Error('Ошибка при чтении данных');
-                  }
-                  const users = await response.json();
-
-                 const user = users.find(user => user.username === username && user.password === password);
-                 const isLocal = window.location.protocol === 'file:';
-               if (user) {
-                 if (isLocal) {
-                   window.location.href = 'C:/Users/natan/OneDrive/Рабочий стол/папка програм/Homwork5B.html.html'; // Локальный путь
-                 } else {
-                 window.location.href = 'Homwork5B.html.html'; // Относительный путь для GitHub Pages
-                    }
-
-                } else {
-                   document.getElementById('login-error').classList.remove('hidden');
-                  document.getElementById('login-noaccount').classList.remove('hidden');
+          try {
+               const response = await fetch('data.json');
+              if (!response.ok) {
+                  throw new Error('Ошибка при чтении данных');
                 }
-            } catch (error) {
-                console.error('Ошибка при входе:', error);
+                const users = await response.json();
+
+             const user = users.find(user => user.username === username && user.password === password);
+             const isLocal = window.location.protocol === 'file:';
+              if (user) {
+                if (isLocal) {
+                   window.location.href = 'C:/Users/natan/OneDrive/Рабочий стол/папка програм/Homwork5B.html.html'; // Локальный путь
+                } else {
+                  window.location.href = 'Homwork5B.html.html'; // Относительный путь для GitHub Pages
+                 }
+              } else {
+                 document.getElementById('login-error').classList.remove('hidden');
+                  document.getElementById('login-noaccount').classList.remove('hidden');
+               }
+             } catch (error) {
+                 console.error('Ошибка при входе:', error);
              }
-        }
+         }
+         function goToAdmin() {
+                const isLocal = window.location.protocol === 'file:';
+                if (isLocal) {
+                  window.location.href = 'E:/register.html/admin.html'; // Локальный путь
+                } else {
+                 window.location.href = 'admin.html'; // Относительный путь для GitHub Pages
+                }
+            }
     </script>
 </body>
 </html>
