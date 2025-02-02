@@ -3,7 +3,7 @@
     <head>
     <title>ДЗ 6Б (лучший класс)</title>
     </head>
-    <body background="https://avatars.mds.yandex.net/i?id=82956c67e114add39c1a11a3d54d502e5fbf941f-12637272-images-thumbs&n=13"></body>
+    <body background="https://ecohimpribor.ru/wp-content/uploads/2022/08/seraya.jpg"></body>
     <h1>ДЗ 6Б  (2025)</h1>
     <h1><pre>                         Расписание занятий                               </pre></h1>
     <table> <tr><td>понедельник</td><td>  РАЗГОВОРЫ О ВАЖНОМ: ничего   	                </td></tr>
