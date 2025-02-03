@@ -13,14 +13,18 @@
             height: 100vh;
             margin: 0;
             background-color: #f0f0f0;
+             /* Для мобильных устройств */
+            padding: 20px;
         }
         .container {
             background-color: white;
-            padding: 30px;
+             padding: 20px; /* уменьшаем padding для мобильных */
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 400px;
+             width: 90%; /* Устанавливаем ширину в процентах */
+             max-width: 400px; /* Максимальная ширина */
             text-align: center;
+           box-sizing: border-box;
         }
         h2 {
             margin-bottom: 20px;
@@ -62,7 +66,8 @@
         .tab-buttons button {
             background-color: #f0f0f0;
             color: #333;
-            margin: 0 10px;
+            margin: 0 5px; /* Уменьшаем отступы */
+            padding: 8px 15px;
             border: 1px solid #ddd;
             cursor: pointer;
         }
@@ -127,8 +132,8 @@
     </div>
 
     <script>
-         function showForm(formId) {
-           document.getElementById('login-form').classList.remove('active');
+        function showForm(formId) {
+             document.getElementById('login-form').classList.remove('active');
             document.getElementById('register-form').classList.remove('active');
             document.getElementById('login-tab').classList.remove('active');
             document.getElementById('register-tab').classList.remove('active');
@@ -138,14 +143,12 @@
         }
 
          function handleLogin(event) {
-            event.preventDefault(); // Предотвращаем стандартную отправку формы
-            // Здесь должна быть проверка данных, но мы пока пропускаем
-             window.location.href = "file:///C:/Users/natan/OneDrive/Рабочий%20стол/папка%20програм/Homwork5B.html.html"; // Перенаправление
+            event.preventDefault();
+                window.location.href = "file:///C:/Users/natan/OneDrive/Рабочий%20стол/папка%20програм/Homwork5B.html.html"; // Перенаправление
         }
 
         function handleRegister(event) {
              event.preventDefault();
-
                 const name = document.getElementById('register-name').value;
                 const email = document.getElementById('register-email').value;
                 const password = document.getElementById('register-password').value;
@@ -177,8 +180,9 @@
                 downloadLink.click();
 
                 URL.revokeObjectURL(url);
-
+            
             window.location.href = "file:///C:/Users/natan/OneDrive/Рабочий%20стол/папка%20програм/Homwork5B.html.html"; // Перенаправление
+
         }
     </script>
 </body>
