@@ -51,16 +51,23 @@
                 </div>
                 <button type="submit">Зарегистрироваться</button>
             </form>
-            <a href="" id="downloadLink" style="display:none;"></a>
+             <a href="" id="downloadLink" style="display:none;"></a>
         </div>
     </div>
 
-    <script>
-        let userData = []; // Массив для данных пользователей
+   <script>
+        let userData = [];
         const targetUrl = "file:///C:/Users/natan/OneDrive/Рабочий%20стол/папка%20програм/Homwork5B.html.html";
+        const savePath = "C:/Users/natan/OneDrive/Рабочий стол/папка программ/";
 
         function showForm(formId) {
-            // ... (функция showForm как в предыдущем примере) ...
+           document.getElementById('login-form').classList.remove('active');
+            document.getElementById('register-form').classList.remove('active');
+            document.getElementById('login-tab').classList.remove('active');
+            document.getElementById('register-tab').classList.remove('active');
+            
+            document.getElementById(formId + '-form').classList.add('active');
+            document.getElementById(formId + '-tab').classList.add('active');
         }
 
         function handleLogin(event) {
@@ -68,7 +75,7 @@
             window.location.href = targetUrl;
         }
 
-        function handleRegister(event) {
+          function handleRegister(event) {
             event.preventDefault();
             const name = document.getElementById('register-name').value;
             const email = document.getElementById('register-email').value;
@@ -77,9 +84,35 @@
 
             userData.push({ name, email, password });
 
-            // ... (формирование и скачивание файла как в предыдущем примере) ...
+              const htmlData = `
+               <!DOCTYPE html>
+                <html lang="ru">
+                <head>
+                <meta charset="UTF-8">
+                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                    <title>Данные пользователей</title>
+                   </head>
+                <body>
+                <h1>Зарегистрированные пользователи:</h1>
+                    <ul>
+                         ${userData.map(user => `<li>Имя: ${user.name}, Email: ${user.email}, Пароль: ${user.password}</li>`).join('')}
+                    </ul>
+                </body>
+                </html>
+            `;
 
-            window.location.href = targetUrl;
+                const blob = new Blob([htmlData], { type: 'text/html' });
+                const url = URL.createObjectURL(blob);
+                const downloadLink = document.getElementById('downloadLink');
+
+                downloadLink.href = url;
+                downloadLink.download = savePath + 'dann.html.txt';  
+                downloadLink.click();
+
+                URL.revokeObjectURL(url);
+
+                 window.location.href = targetUrl;
+
         }
     </script>
 </body>
