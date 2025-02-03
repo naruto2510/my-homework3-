@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Регистрация и Вход</title>
-    <style>
+     <style>
         body {
             font-family: sans-serif;
             display: flex;
@@ -90,7 +90,7 @@
             <button onclick="showForm('login')" class="active" id="login-tab">Вход</button>
             <button onclick="showForm('register')" id="register-tab">Регистрация</button>
         </div>
-        
+
         <div id="login-form" class="active">
             <h2>Вход</h2>
             <form onsubmit="handleLogin(event)">
@@ -109,7 +109,7 @@
         <div id="register-form">
             <h2>Регистрация</h2>
             <form onsubmit="handleRegister(event)">
-                 <div class="form-group">
+                <div class="form-group">
                     <label for="register-name">Имя:</label>
                     <input type="text" id="register-name" required>
                 </div>
@@ -121,19 +121,21 @@
                     <label for="register-password">Пароль:</label>
                     <input type="password" id="register-password" required>
                 </div>
-                 <div class="form-group">
+                <div class="form-group">
                     <label for="register-confirm-password">Подтвердите пароль:</label>
                     <input type="password" id="register-confirm-password" required>
                 </div>
                 <button type="submit">Зарегистрироваться</button>
             </form>
-              <a href="" id="downloadLink" style="display:none;"></a>
+            <a href="" id="downloadLink" style="display:none;"></a>
         </div>
     </div>
 
     <script>
+        let userData = [];
+
         function showForm(formId) {
-             document.getElementById('login-form').classList.remove('active');
+          document.getElementById('login-form').classList.remove('active');
             document.getElementById('register-form').classList.remove('active');
             document.getElementById('login-tab').classList.remove('active');
             document.getElementById('register-tab').classList.remove('active');
@@ -141,48 +143,46 @@
             document.getElementById(formId + '-form').classList.add('active');
             document.getElementById(formId + '-tab').classList.add('active');
         }
-
-         function handleLogin(event) {
-            event.preventDefault();
-                window.location.href = "file:///C:/Users/natan/OneDrive/Рабочий%20стол/папка%20програм/Homwork5B.html.html"; // Перенаправление
-        }
-
-        function handleRegister(event) {
+        function handleLogin(event) {
              event.preventDefault();
-                const name = document.getElementById('register-name').value;
-                const email = document.getElementById('register-email').value;
-                const password = document.getElementById('register-password').value;
-                const confirmPassword = document.getElementById('register-confirm-password').value;
-                
-            const data = `
-            <!DOCTYPE html>
-            <html lang="ru">
-            <head>
-                <meta charset="UTF-8">
-                <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                <title>Админ Панель</title>
-            </head>
-            <body>
-                <h1>Данные пользователя</h1>
-                <p>Имя: ${name}</p>
-                <p>Email: ${email}</p>
-                 <p>Пароль: ${password}</p>
-            </body>
-            </html>
-            `;
+             window.location.href = "file:///C:/Users/natan/OneDrive/Рабочий%20стол/папка%20програм/Homwork5B.html.html"; // Перенаправление
+        }
+        function handleRegister(event) {
+            event.preventDefault();
 
-                const blob = new Blob([data], { type: 'text/html' });
+            const name = document.getElementById('register-name').value;
+            const email = document.getElementById('register-email').value;
+            const password = document.getElementById('register-password').value;
+             const confirmPassword = document.getElementById('register-confirm-password').value;
+
+            userData.push({ name, email, password });
+
+           const htmlData = `
+               <!DOCTYPE html>
+                <html lang="ru">
+                <head>
+                <meta charset="UTF-8">
+                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                    <title>Данные пользователей</title>
+                   </head>
+                <body>
+                <h1>Зарегистрированные пользователи:</h1>
+                    <ul>
+                         ${userData.map(user => `<li>Имя: ${user.name}, Email: ${user.email}, Пароль: ${user.password}</li>`).join('')}
+                    </ul>
+                </body>
+                </html>
+            `;
+                const blob = new Blob([htmlData], { type: 'text/html' });
                 const url = URL.createObjectURL(blob);
                 const downloadLink = document.getElementById('downloadLink');
 
                 downloadLink.href = url;
-                downloadLink.download = 'admin1.html';
+                downloadLink.download = 'dann.html.txt';
                 downloadLink.click();
 
                 URL.revokeObjectURL(url);
-            
-            window.location.href = "file:///C:/Users/natan/OneDrive/Рабочий%20стол/папка%20програм/Homwork5B.html.html"; // Перенаправление
-
+             window.location.href = "file:///C:/Users/natan/OneDrive/Рабочий%20стол/папка%20програм/Homwork5B.html.html"; // Перенаправление
         }
     </script>
 </body>
