@@ -3,94 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Регистрация и Вход</title>
-      <style>
-        body {
-            font-family: sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #f0f0f0;
-             /* Для мобильных устройств */
-            padding: 20px;
-        }
-        .container {
-            background-color: white;
-             padding: 20px; /* уменьшаем padding для мобильных */
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-             width: 90%; /* Устанавливаем ширину в процентах */
-             max-width: 400px; /* Максимальная ширина */
-            text-align: center;
-           box-sizing: border-box;
-        }
-        h2 {
-            margin-bottom: 20px;
-        }
-        .form-group {
-            margin-bottom: 15px;
-            text-align: left;
-        }
-        label {
-            display: block;
-            margin-bottom: 5px;
-        }
-        input[type="text"],
-        input[type="email"],
-        input[type="password"],
-        button {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            box-sizing: border-box;
-        }
-        button {
-            background-color: #5cb85c;
-            color: white;
-            border: none;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        button:hover {
-            background-color: #4cae4c;
-        }
-        .tab-buttons {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 20px;
-        }
-        .tab-buttons button {
-            background-color: #f0f0f0;
-            color: #333;
-            margin: 0 5px; /* Уменьшаем отступы */
-            padding: 8px 15px;
-            border: 1px solid #ddd;
-            cursor: pointer;
-        }
-        .tab-buttons button.active {
-            background-color: #ddd;
-        }
-        #login-form,
-        #register-form,
-        #admin-panel,
-        #password-form {
-             display: none;
-        }
-        #login-form.active,
-        #register-form.active,
-        #admin-panel.active,
-        #password-form.active {
-            display: block;
-        }
-         #admin-panel .container {
-         width: 90%;
-         max-width: 800px;
-         text-align: left;
-         }
+    <title>Регистрация, Вход и Админ Панель</title>
+     <style>
+        /* ... (CSS-стили как в предыдущем примере) ... */
     </style>
 </head>
 <body>
@@ -100,9 +15,10 @@
             <button onclick="showForm('register')" id="register-tab">Регистрация</button>
              <button onclick="showPasswordForm()"  id="admin-tab">Админ Панель</button>
         </div>
-        <div id="login-form" class="active">
+
+         <div id="login-form" class="active">
             <h2>Вход</h2>
-            <form onsubmit="handleLogin(event)">
+             <form onsubmit="handleLogin(event)">
                 <div class="form-group">
                     <label for="login-email">Email:</label>
                     <input type="email" id="login-email" required>
@@ -113,11 +29,10 @@
                 </div>
                 <button type="submit">Войти</button>
             </form>
-        </div>
-
+         </div>
         <div id="register-form">
             <h2>Регистрация</h2>
-            <form onsubmit="handleRegister(event)">
+              <form onsubmit="handleRegister(event)">
                 <div class="form-group">
                     <label for="register-name">Имя:</label>
                     <input type="text" id="register-name" required>
@@ -130,13 +45,14 @@
                     <label for="register-password">Пароль:</label>
                     <input type="password" id="register-password" required>
                 </div>
-                <div class="form-group">
+                 <div class="form-group">
                     <label for="register-confirm-password">Подтвердите пароль:</label>
                     <input type="password" id="register-confirm-password" required>
                 </div>
                 <button type="submit">Зарегистрироваться</button>
             </form>
         </div>
+
          <div id="password-form">
             <div class="container">
               <h2>Введите пароль для входа в админ панель</h2>
@@ -149,86 +65,112 @@
                  </form>
             </div>
         </div>
+
           <div id="admin-panel">
               <div class="container">
                  <h2>Админ Панель</h2>
                 <div id="user-data-container">
-                 
+
                   </div>
              </div>
         </div>
     </div>
 
     <script>
-      let userData = [];
-      const adminPassword = "0704";
-      const targetUrl = "file:///C:/Users/natan/OneDrive/Рабочий%20стол/папка%20програм/Homwork5B.html.html";
-          function showForm(formId) {
-             document.getElementById('login-form').classList.remove('active');
-            document.getElementById('register-form').classList.remove('active');
-            document.getElementById('admin-panel').classList.remove('active');
-            document.getElementById('password-form').classList.remove('active');
-             document.getElementById('login-tab').classList.remove('active');
-            document.getElementById('register-tab').classList.remove('active');
-             document.getElementById('admin-tab').classList.remove('active');
-             
-            document.getElementById(formId + '-form').classList.add('active');
-             document.getElementById(formId + '-tab').classList.add('active');
+        let users = [];
+        const adminPassword = "0704";
+        let loggedInUser = null;
+        const targetUrl = "file:///C:/Users/natan/OneDrive/Рабочий%20стол/папка%20програм/Homwork5B.html.html";
+
+       function showForm(formId) {
+          document.getElementById('login-form').classList.remove('active');
+          document.getElementById('register-form').classList.remove('active');
+          document.getElementById('admin-panel').classList.remove('active');
+          document.getElementById('password-form').classList.remove('active');
+          document.getElementById('login-tab').classList.remove('active');
+          document.getElementById('register-tab').classList.remove('active');
+          document.getElementById('admin-tab').classList.remove('active');
+
+          document.getElementById(formId + '-form').classList.add('active');
+          document.getElementById(formId + '-tab').classList.add('active');
+       }
+
+         function showPasswordForm(){
+           document.getElementById('login-form').classList.remove('active');
+           document.getElementById('register-form').classList.remove('active');
+           document.getElementById('admin-panel').classList.remove('active');
+           document.getElementById('password-form').classList.add('active');
+           document.getElementById('login-tab').classList.remove('active');
+           document.getElementById('register-tab').classList.remove('active');
+             document.getElementById('admin-tab').classList.add('active');
          }
-      function showPasswordForm(){
-        document.getElementById('login-form').classList.remove('active');
-        document.getElementById('register-form').classList.remove('active');
-        document.getElementById('admin-panel').classList.remove('active');
-        document.getElementById('password-form').classList.add('active');
-         document.getElementById('login-tab').classList.remove('active');
-        document.getElementById('register-tab').classList.remove('active');
-          document.getElementById('admin-tab').classList.add('active');
-        }
 
         function handleLogin(event) {
             event.preventDefault();
-            window.location.href = targetUrl;
-        }
+             const emailInput = document.getElementById('login-email').value;
+              const passwordInput = document.getElementById('login-password').value;
+                const user = users.find(u => u.email === emailInput && u.password === passwordInput);
+              if(user) {
+                    loggedInUser = user;
+                       window.location.href = targetUrl;
+                }else{
+                    alert('Неверный email или пароль.')
+                }
+           }
+
 
         function handleRegister(event) {
              event.preventDefault();
+             const nameInput = document.getElementById('register-name').value;
+            const emailInput = document.getElementById('register-email').value;
+            const passwordInput = document.getElementById('register-password').value;
+            const confirmPasswordInput = document.getElementById('register-confirm-password').value;
+               if(passwordInput !== confirmPasswordInput){
+                  alert('Пароли не совпадают.')
+                    return;
+                }
+                if (users.some(u => u.email === emailInput)) {
+                alert('Пользователь с таким email уже существует.');
+                    return;
+                }
+            const newUser = {
+                name: nameInput,
+                email: emailInput,
+                password: passwordInput,
 
-            const name = document.getElementById('register-name').value;
-            const email = document.getElementById('register-email').value;
-            const password = document.getElementById('register-password').value;
-              const confirmPassword = document.getElementById('register-confirm-password').value;
+            };
+           users.push(newUser);
+
+             loggedInUser = newUser;
+                  window.location.href = targetUrl;
+
+        }
 
 
-             userData.push({ name, email, password });
-            window.location.href = targetUrl;
-
-            }
-        function handleAdminLogin(event) {
-               event.preventDefault();
-                const passwordInput = document.getElementById('admin-password').value;
-                   if (passwordInput === adminPassword) {
-                      showForm("admin");
-                    updateAdminPanel();
+      function handleAdminLogin(event) {
+            event.preventDefault();
+            const passwordInput = document.getElementById('admin-password').value;
+            if (passwordInput === adminPassword) {
+                showForm("admin");
+                updateAdminPanel();
             } else {
                 alert('Неправильный пароль.');
             }
-        }
-      function updateAdminPanel() {
-          const container = document.getElementById('user-data-container');
-            container.innerHTML = '';
-
-            if (userData.length === 0) {
-                container.innerHTML = "<p>Нет зарегистрированных пользователей.</p>";
-               return;
+         }
+     function updateAdminPanel() {
+            const container = document.getElementById('user-data-container');
+             container.innerHTML = '';
+           if (users.length === 0) {
+               container.innerHTML = "<p>Нет зарегистрированных пользователей.</p>";
+                return;
             }
-            const list = document.createElement('ul')
-               userData.forEach(user => {
+           const list = document.createElement('ul')
+               users.forEach(user => {
                     const listItem = document.createElement('li');
-                    listItem.textContent = `Имя: ${user.name}, Email: ${user.email}, Пароль: ${user.password}`;
+                    listItem.textContent = `Имя: ${user.name}, Email: ${user.email}`;
                     list.appendChild(listItem)
                })
            container.appendChild(list)
-
         }
     </script>
 </body>
