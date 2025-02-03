@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Вход и Регистрация</title>
+    <title>Регистрация и Вход</title>
     <style>
         body {
             font-family: sans-serif;
@@ -12,13 +12,14 @@
             align-items: center;
             height: 100vh;
             margin: 0;
-            background-color: #f4f4f4;
+            background-color: #f0f0f0;
         }
         .container {
             background-color: white;
-            padding: 20px;
+            padding: 30px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 400px;
             text-align: center;
         }
         h2 {
@@ -26,167 +27,159 @@
         }
         .form-group {
             margin-bottom: 15px;
+            text-align: left;
         }
         label {
             display: block;
             margin-bottom: 5px;
-            text-align: left;
         }
         input[type="text"],
-        input[type="password"] {
-            width: calc(100% - 22px);
+        input[type="email"],
+        input[type="password"],
+        button {
+            width: 100%;
             padding: 10px;
-            border: 1px solid #ccc;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
             border-radius: 4px;
+            box-sizing: border-box;
         }
         button {
-            background-color: #007bff;
+            background-color: #5cb85c;
             color: white;
-            padding: 10px 20px;
             border: none;
-            border-radius: 4px;
             cursor: pointer;
+            transition: background-color 0.3s;
         }
         button:hover {
-            background-color: #0056b3;
+            background-color: #4cae4c;
         }
-        .error-message {
-            color: red;
-            margin-top: 5px;
+        .tab-buttons {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
         }
-        .hidden {
+        .tab-buttons button {
+            background-color: #f0f0f0;
+            color: #333;
+            margin: 0 10px;
+            border: 1px solid #ddd;
+            cursor: pointer;
+        }
+        .tab-buttons button.active {
+            background-color: #ddd;
+        }
+        #login-form,
+        #register-form {
             display: none;
+        }
+        #login-form.active,
+        #register-form.active {
+            display: block;
         }
     </style>
 </head>
 <body>
     <div class="container">
+        <div class="tab-buttons">
+            <button onclick="showForm('login')" class="active" id="login-tab">Вход</button>
+            <button onclick="showForm('register')" id="register-tab">Регистрация</button>
+        </div>
+        
+        <div id="login-form" class="active">
+            <h2>Вход</h2>
+            <form onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label for="login-email">Email:</label>
+                    <input type="email" id="login-email" required>
+                </div>
+                <div class="form-group">
+                    <label for="login-password">Пароль:</label>
+                    <input type="password" id="login-password" required>
+                </div>
+                <button type="submit">Войти</button>
+            </form>
+        </div>
 
         <div id="register-form">
             <h2>Регистрация</h2>
             <form onsubmit="handleRegister(event)">
-                <div class="form-group">
-                    <label for="register-username">Имя пользователя</label>
-                    <input type="text" id="register-username" required>
+                 <div class="form-group">
+                    <label for="register-name">Имя:</label>
+                    <input type="text" id="register-name" required>
                 </div>
                 <div class="form-group">
-                    <label for="register-password">Пароль</label>
+                    <label for="register-email">Email:</label>
+                    <input type="email" id="register-email" required>
+                </div>
+                <div class="form-group">
+                    <label for="register-password">Пароль:</label>
                     <input type="password" id="register-password" required>
                 </div>
-                <div class="form-group">
-                    <label for="register-email">Email</label>
-                    <input type="text" id="register-email" required>
+                 <div class="form-group">
+                    <label for="register-confirm-password">Подтвердите пароль:</label>
+                    <input type="password" id="register-confirm-password" required>
                 </div>
                 <button type="submit">Зарегистрироваться</button>
             </form>
-            <p>Уже есть аккаунт? <a href="#" onclick="showLoginForm()">Войти</a></p>
+              <a href="" id="downloadLink" style="display:none;"></a>
         </div>
-
-        <div id="login-form" class="hidden">
-            <h2>Вход</h2>
-            <form onsubmit="handleLogin(event)">
-                <div class="form-group">
-                    <label for="login-username">Имя пользователя</label>
-                    <input type="text" id="login-username" required>
-                </div>
-                <div class="form-group">
-                    <label for="login-password">Пароль</label>
-                    <input type="password" id="login-password" required>
-                </div>
-                <button type="submit">Войти</button>
-                <p class="error-message hidden" id="login-error">Неверное имя пользователя или пароль.</p>
-                <p class="error-message hidden" id="login-noaccount">Аккаунт не найден, зарегистрируйтесь.</p>
-            </form>
-             <p>Нет аккаунта? <a href="#" onclick="showRegisterForm()">Зарегистрироваться</a></p>
-        </div>
-         <button onclick="goToAdmin()">Админ-панель</button>
     </div>
 
     <script>
-     function showRegisterForm() {
-            document.getElementById('login-form').classList.add('hidden');
-            document.getElementById('register-form').classList.remove('hidden');
+         function showForm(formId) {
+           document.getElementById('login-form').classList.remove('active');
+            document.getElementById('register-form').classList.remove('active');
+            document.getElementById('login-tab').classList.remove('active');
+            document.getElementById('register-tab').classList.remove('active');
+            
+            document.getElementById(formId + '-form').classList.add('active');
+            document.getElementById(formId + '-tab').classList.add('active');
         }
 
-        function showLoginForm() {
-            document.getElementById('login-form').classList.remove('hidden');
-            document.getElementById('register-form').classList.add('hidden');
+         function handleLogin(event) {
+            event.preventDefault(); // Предотвращаем стандартную отправку формы
+            // Здесь должна быть проверка данных, но мы пока пропускаем
+             window.location.href = "file:///C:/Users/natan/OneDrive/Рабочий%20стол/папка%20програм/Homwork5B.html.html"; // Перенаправление
         }
 
-        async function handleRegister(event) {
-            event.preventDefault();
-            const username = document.getElementById('register-username').value;
-            const password = document.getElementById('register-password').value;
-            const email = document.getElementById('register-email').value;
+        function handleRegister(event) {
+             event.preventDefault();
 
-             const userData = {
-                  username: username,
-                 password: password,
-                email: email
-             };
-            try {
-               const response = await fetch('data.json');
-               let users = [];
-                if (response.ok) {
-                   users = await response.json();
-                 }
+                const name = document.getElementById('register-name').value;
+                const email = document.getElementById('register-email').value;
+                const password = document.getElementById('register-password').value;
+                const confirmPassword = document.getElementById('register-confirm-password').value;
+                
+            const data = `
+            <!DOCTYPE html>
+            <html lang="ru">
+            <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>Админ Панель</title>
+            </head>
+            <body>
+                <h1>Данные пользователя</h1>
+                <p>Имя: ${name}</p>
+                <p>Email: ${email}</p>
+                 <p>Пароль: ${password}</p>
+            </body>
+            </html>
+            `;
 
-                 users.push(userData);
-                 await fetch('data.json', {
-                     method: 'PUT',
-                    headers: {
-                      'Content-Type': 'application/json',
-                  },
-                  body: JSON.stringify(users),
-                 });
+                const blob = new Blob([data], { type: 'text/html' });
+                const url = URL.createObjectURL(blob);
+                const downloadLink = document.getElementById('downloadLink');
 
-                const isLocal = window.location.protocol === 'file:';
+                downloadLink.href = url;
+                downloadLink.download = 'admin1.html';
+                downloadLink.click();
 
-                if (isLocal) {
-                   window.location.href = 'C:/Users/natan/OneDrive/Рабочий стол/папка програм/Homwork5B.html.html'; // Локальный путь
-                 } else {
-                   window.location.href = 'Homwork5B.html.html'; // Относительный путь для GitHub Pages
-                  }
+                URL.revokeObjectURL(url);
 
-            } catch (error) {
-                console.error('Ошибка при сохранении данных', error);
-            }
+            window.location.href = "file:///C:/Users/natan/OneDrive/Рабочий%20стол/папка%20програм/Homwork5B.html.html"; // Перенаправление
         }
-        async function handleLogin(event) {
-            event.preventDefault();
-            const username = document.getElementById('login-username').value;
-            const password = document.getElementById('login-password').value;
-          try {
-               const response = await fetch('data.json');
-              if (!response.ok) {
-                  throw new Error('Ошибка при чтении данных');
-                }
-                const users = await response.json();
-
-             const user = users.find(user => user.username === username && user.password === password);
-             const isLocal = window.location.protocol === 'file:';
-              if (user) {
-                if (isLocal) {
-                   window.location.href = 'C:/Users/natan/OneDrive/Рабочий стол/папка програм/Homwork5B.html.html'; // Локальный путь
-                } else {
-                  window.location.href = 'Homwork5B.html.html'; // Относительный путь для GitHub Pages
-                 }
-              } else {
-                 document.getElementById('login-error').classList.remove('hidden');
-                  document.getElementById('login-noaccount').classList.remove('hidden');
-               }
-             } catch (error) {
-                 console.error('Ошибка при входе:', error);
-             }
-         }
-         function goToAdmin() {
-                const isLocal = window.location.protocol === 'file:';
-                if (isLocal) {
-                  window.location.href = 'E:/register.html/admin1.html'; // Локальный путь
-                } else {
-                 window.location.href = 'admin1.html'; // Относительный путь для GitHub Pages
-                }
-            }
     </script>
 </body>
 </html>
