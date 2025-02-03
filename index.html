@@ -4,17 +4,102 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Регистрация и Вход</title>
-    <style>
-        /* ... (CSS-стили как в предыдущем примере) ... */
+      <style>
+        body {
+            font-family: sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+             /* Для мобильных устройств */
+            padding: 20px;
+        }
+        .container {
+            background-color: white;
+             padding: 20px; /* уменьшаем padding для мобильных */
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+             width: 90%; /* Устанавливаем ширину в процентах */
+             max-width: 400px; /* Максимальная ширина */
+            text-align: center;
+           box-sizing: border-box;
+        }
+        h2 {
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #5cb85c;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #4cae4c;
+        }
+        .tab-buttons {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        .tab-buttons button {
+            background-color: #f0f0f0;
+            color: #333;
+            margin: 0 5px; /* Уменьшаем отступы */
+            padding: 8px 15px;
+            border: 1px solid #ddd;
+            cursor: pointer;
+        }
+        .tab-buttons button.active {
+            background-color: #ddd;
+        }
+        #login-form,
+        #register-form,
+        #admin-panel,
+        #password-form {
+             display: none;
+        }
+        #login-form.active,
+        #register-form.active,
+        #admin-panel.active,
+        #password-form.active {
+            display: block;
+        }
+         #admin-panel .container {
+         width: 90%;
+         max-width: 800px;
+         text-align: left;
+         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="tab-buttons">
+         <div class="tab-buttons">
             <button onclick="showForm('login')" class="active" id="login-tab">Вход</button>
             <button onclick="showForm('register')" id="register-tab">Регистрация</button>
+             <button onclick="showPasswordForm()"  id="admin-tab">Админ Панель</button>
         </div>
-
         <div id="login-form" class="active">
             <h2>Вход</h2>
             <form onsubmit="handleLogin(event)">
@@ -51,23 +136,53 @@
                 </div>
                 <button type="submit">Зарегистрироваться</button>
             </form>
-             <a href="" id="downloadLink" style="display:none;"></a>
+        </div>
+         <div id="password-form">
+            <div class="container">
+              <h2>Введите пароль для входа в админ панель</h2>
+                <form onsubmit="handleAdminLogin(event)">
+                    <div class="form-group">
+                     <label for="admin-password">Пароль:</label>
+                        <input type="password" id="admin-password" required>
+                     </div>
+                    <button type="submit">Войти</button>
+                 </form>
+            </div>
+        </div>
+          <div id="admin-panel">
+              <div class="container">
+                 <h2>Админ Панель</h2>
+                <div id="user-data-container">
+                 
+                  </div>
+             </div>
         </div>
     </div>
 
-   <script>
-        let userData = [];
-        const targetUrl = "file:///C:/Users/natan/OneDrive/Рабочий%20стол/папка%20програм/Homwork5B.html.html";
-        const savePath = "C:/Users/natan/OneDrive/Рабочий стол/папка программ/";
-
-        function showForm(formId) {
-           document.getElementById('login-form').classList.remove('active');
+    <script>
+      let userData = [];
+      const adminPassword = "0704";
+      const targetUrl = "file:///C:/Users/natan/OneDrive/Рабочий%20стол/папка%20програм/Homwork5B.html.html";
+          function showForm(formId) {
+             document.getElementById('login-form').classList.remove('active');
             document.getElementById('register-form').classList.remove('active');
-            document.getElementById('login-tab').classList.remove('active');
+            document.getElementById('admin-panel').classList.remove('active');
+            document.getElementById('password-form').classList.remove('active');
+             document.getElementById('login-tab').classList.remove('active');
             document.getElementById('register-tab').classList.remove('active');
-            
+             document.getElementById('admin-tab').classList.remove('active');
+             
             document.getElementById(formId + '-form').classList.add('active');
-            document.getElementById(formId + '-tab').classList.add('active');
+             document.getElementById(formId + '-tab').classList.add('active');
+         }
+      function showPasswordForm(){
+        document.getElementById('login-form').classList.remove('active');
+        document.getElementById('register-form').classList.remove('active');
+        document.getElementById('admin-panel').classList.remove('active');
+        document.getElementById('password-form').classList.add('active');
+         document.getElementById('login-tab').classList.remove('active');
+        document.getElementById('register-tab').classList.remove('active');
+          document.getElementById('admin-tab').classList.add('active');
         }
 
         function handleLogin(event) {
@@ -75,43 +190,44 @@
             window.location.href = targetUrl;
         }
 
-          function handleRegister(event) {
-            event.preventDefault();
+        function handleRegister(event) {
+             event.preventDefault();
+
             const name = document.getElementById('register-name').value;
             const email = document.getElementById('register-email').value;
             const password = document.getElementById('register-password').value;
-            const confirmPassword = document.getElementById('register-confirm-password').value;
+              const confirmPassword = document.getElementById('register-confirm-password').value;
 
-            userData.push({ name, email, password });
 
-              const htmlData = `
-               <!DOCTYPE html>
-                <html lang="ru">
-                <head>
-                <meta charset="UTF-8">
-                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                    <title>Данные пользователей</title>
-                   </head>
-                <body>
-                <h1>Зарегистрированные пользователи:</h1>
-                    <ul>
-                         ${userData.map(user => `<li>Имя: ${user.name}, Email: ${user.email}, Пароль: ${user.password}</li>`).join('')}
-                    </ul>
-                </body>
-                </html>
-            `;
+             userData.push({ name, email, password });
+            window.location.href = targetUrl;
 
-                const blob = new Blob([htmlData], { type: 'text/html' });
-                const url = URL.createObjectURL(blob);
-                const downloadLink = document.getElementById('downloadLink');
+            }
+        function handleAdminLogin(event) {
+               event.preventDefault();
+                const passwordInput = document.getElementById('admin-password').value;
+                   if (passwordInput === adminPassword) {
+                      showForm("admin");
+                    updateAdminPanel();
+            } else {
+                alert('Неправильный пароль.');
+            }
+        }
+      function updateAdminPanel() {
+          const container = document.getElementById('user-data-container');
+            container.innerHTML = '';
 
-                downloadLink.href = url;
-                downloadLink.download = savePath + 'dann.html.txt';  
-                downloadLink.click();
-
-                URL.revokeObjectURL(url);
-
-                 window.location.href = targetUrl;
+            if (userData.length === 0) {
+                container.innerHTML = "<p>Нет зарегистрированных пользователей.</p>";
+               return;
+            }
+            const list = document.createElement('ul')
+               userData.forEach(user => {
+                    const listItem = document.createElement('li');
+                    listItem.textContent = `Имя: ${user.name}, Email: ${user.email}, Пароль: ${user.password}`;
+                    list.appendChild(listItem)
+               })
+           container.appendChild(list)
 
         }
     </script>
